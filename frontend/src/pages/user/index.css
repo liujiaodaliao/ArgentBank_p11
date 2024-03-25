@@ -1,0 +1,27 @@
+.edit {
+    display: inline-block;
+    margin: 0 auto; 
+    color: #FFF;
+}
+.edit form{
+    display: inline-block;
+}
+.edit .form-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+.edit .form-item label{
+    width: 100px;
+}
+.edit .operation{
+    /* margin: 20px 0; */
+    display: flex;
+    justify-content: center;
+
+}
+
+.edit .operation button{
+    margin-right: 40px;
+    width: 100%;
+    margin: 20px 5px;
+}
