@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
-import { removeUserInfo } from "../../store/slice/user";
+import { removeUserInfo, saveUserInfo } from "../../store/slice/user";
 import { useSelector, useDispatch } from "react-redux";
 import { UPDATE_PROFILE } from "../../services/user";
 
@@ -41,7 +41,10 @@ export default function User() {
     // OK
     alert("edit successfully ");
     setIsEdit(false);
-    //TODO
+
+    //将 res 传递给 saveUserInfo 函数来更新 Redux 中的用户信息
+    console.log("saveUserInfo", res);
+    dispatch(saveUserInfo(res)); 
   };
 
   useEffect(() => {
