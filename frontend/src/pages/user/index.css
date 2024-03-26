@@ -9,15 +9,18 @@
 .edit .form-item {
     display: flex;
     margin-bottom: 10px;
+    align-items: center;
 }
 .edit .form-item label{
     width: 100px;
+}
+.edit .form-item input{
+    height: 20px;
 }
 .edit .operation{
     /* margin: 20px 0; */
     display: flex;
     justify-content: center;
-
 }
 
 .edit .operation button{

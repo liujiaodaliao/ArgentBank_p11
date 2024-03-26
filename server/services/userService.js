@@ -6,6 +6,7 @@ module.exports.createUser = async (serviceData) => {
   console.log(serviceData);
   try {
     const user = await User.findOne({ email: serviceData.email });
+    // 校验注册逻辑 不能重复注册
     if (user) {
       throw new Error("Email already exists");
     }
