@@ -51,15 +51,5 @@ function App() {
   );
 }
 
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/home" element={<Home></Home>}></Route>
-//         <Route path="/sign" element={<Sign></Sign>}></Route>
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// }
 
 export default App;

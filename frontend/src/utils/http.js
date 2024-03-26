@@ -64,14 +64,3 @@ export const GET = (url, params) => {
   return instance.get(url, { params });
 };
 
-// class Person {
-//   constructor(name, sex) {
-//     this.name = name;
-//     this.sex = sex;
-//   }
-//   eat() {
-//     console.log("eat");
-//   }
-// }
-
-// const person = new Person("John", "male");

@@ -16,15 +16,6 @@ import Sign from "./pages/sign/index";
 import router from "./routers/index";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(
-//   <React.StrictMode>
-//     <Provider store={store}>
-//       <HashRouter>
-//         <App></App>
-//       </HashRouter>
-//     </Provider>
-//   </React.StrictMode>
-// );
 
 root.render(
   <React.StrictMode>
