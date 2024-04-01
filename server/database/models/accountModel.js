@@ -6,8 +6,6 @@ const accountSchema = new mongoose.Schema(
     accountTitle: String,
     amount: Number,
     description: String,
-    createAt: String,
-    updateAt: String,
   },
 
   {

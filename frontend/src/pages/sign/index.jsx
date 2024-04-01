@@ -1,5 +1,4 @@
 import React, { Component, useState, useRef, useEffect } from "react";
-import Card from "../../components/Card";
 
 import Header from "../../components/Header";
 import { LOGIN, GET_PROFILE } from "../../services/user";
