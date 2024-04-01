@@ -6,6 +6,7 @@ const yaml = require("yamljs");
 const swaggerDocs = yaml.load("./swagger.yaml");
 const dbConnection = require("./database/connection");
 const { createAccount } = require("./services/accountService");
+const { createTransactions } = require("./services/transactionService");
 
 dotEnv.config();
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Handle custom routes
 app.use("/api/v1/user", require("./routes/userRoutes"));
+app.use("/api/v1/account", require("./routes/accountRoutes"));
 
 // API Documentation
 if (process.env.NODE_ENV !== "production") {
@@ -38,4 +40,5 @@ app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 
   createAccount();
+  createTransactions();
 });
