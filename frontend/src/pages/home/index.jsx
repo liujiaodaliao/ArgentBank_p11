@@ -5,6 +5,7 @@ import IconChat from "../../assets/icon-chat.webp";
 import IconMoney from "../../assets/icon-money.webp";
 import IconSecurity from "../../assets/icon-security.webp";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -49,9 +50,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

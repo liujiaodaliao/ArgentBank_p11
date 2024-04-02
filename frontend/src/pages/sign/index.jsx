@@ -1,6 +1,8 @@
 import React, { Component, useState, useRef, useEffect } from "react";
 
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
 import { LOGIN, GET_PROFILE } from "../../services/user";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +23,9 @@ export default function Sign() {
   const [password, setPassword] = useState("password123");
   const [remember, setRemember] = useState(false);
 
-  const usernameRef = useRef(); // ref.currrent === document.getElementBy.... 一致的, 原生取表单数据用的是value属性。注意checkbox，radio 需要用checked去获取勾选状态
+  const usernameRef = useRef(); 
+  // ref.currrent === document.getElementBy.... 一致的, 
+  //原生取表单数据用的是value属性。注意checkbox，radio 需要用checked去获取勾选状态
 
   useEffect(() => {
     // 将焦点移动到用户名输入框上
@@ -44,13 +48,6 @@ export default function Sign() {
     return true;
   };
 
-  const getUserInfo = async () => {
-    const res = await GET_PROFILE();
-    console.log("getuserinfo", res);
-    // 存储到redux
-    dispatch(saveUserInfo(res));
-  };
-
   const handleSignIn = async () => {
     const isValid = formValidate();
     if (!isValid) return;
@@ -67,6 +64,13 @@ export default function Sign() {
     localStorage.setItem("token", res.token);
     await getUserInfo();
     navigate("/user");
+  };
+
+  const getUserInfo = async () => {
+    const res = await GET_PROFILE();
+    console.log("getuserinfo", res);
+    // 存储到redux
+    dispatch(saveUserInfo(res));
   };
 
   return (
@@ -116,9 +120,7 @@ export default function Sign() {
           </form>
         </section>
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

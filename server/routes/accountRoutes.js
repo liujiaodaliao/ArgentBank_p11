@@ -9,10 +9,4 @@ router.get(
   accountController.getAccount
 );
 
-router.post(
-  "/getAccount",
-  tokenValidation.validateToken,
-  accountController.getAccount
-);
-
 module.exports = router;
