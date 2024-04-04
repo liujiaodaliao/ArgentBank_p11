@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { GET_TRANSACTIONS } from "../../services/transaction";
 
 function AccountCard(props) {
   const { accountTitle, amount, description, id } = props; // id-->accountId
 
-  const queryDetail = () => {
-    console.log("query detail");
+  const [transactions, setTransactions] = useState([]);
+  const queryDetail = async () => {
+    const res = await GET_TRANSACTIONS({ id });
+    if (res.length) {
+      setTransactions(res);
+      console.log(res);
+    }
   };
+
   return (
     <section className="account">
       <div className="account-content-wrapper">
@@ -23,8 +30,10 @@ function AccountCard(props) {
   );
 }
 
+// 约束使用这个组件的参数格式
 AccountCard.propTypes = {
-  title: "string",
+  accountTitle: PropTypes.string,
+  amount: PropTypes.number,
 };
 
 export default AccountCard;
