@@ -6,7 +6,7 @@ import AccountCard from "../../components/AccountCard";
 
 import { removeUserInfo, saveUserInfo } from "../../store/slice/user";
 import { useSelector, useDispatch } from "react-redux";
-import { UPDATE_PROFILE } from "../../services/user";
+import { UPDATE_PROFILE, GET_PROFILE } from "../../services/user";
 import { GET_ACCOUNTS } from "../../services/account";
 
 import "./index.css";
@@ -59,8 +59,10 @@ export default function User() {
     setIsEdit(false);
 
     //将 res 传递给 saveUserInfo 函数来更新 Redux 中的用户信息
-    console.log("saveUserInfo", res);
-    dispatch(saveUserInfo(res));
+    console.log("updateUserInfo", res);
+    const res2 = await GET_PROFILE();
+    dispatch(saveUserInfo(res2));
+    console.log("saveUserInfo", res2);
   };
 
   useEffect(() => {
