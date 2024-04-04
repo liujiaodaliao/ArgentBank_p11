@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import AccountCard from "../../components/AccountCard";
 
 import { removeUserInfo, saveUserInfo } from "../../store/slice/user";
@@ -28,6 +29,7 @@ export default function User() {
     const res = await GET_ACCOUNTS();
     if (res.length) {
       setAccounts(res);
+      return res; // 返回响应结果
     }
   };
 
@@ -35,7 +37,9 @@ export default function User() {
     if (!firstName || !lastName || !userName) {
       return navigate("/sign");
     }
-    return queryAccounts();
+    return queryAccounts().then((response) => {
+      console.log(response); // 打印响应结果
+    });
   };
 
   const onSignOut = () => {
@@ -128,11 +132,11 @@ export default function User() {
         <h2 className="sr-only">Accounts</h2>
 
         {accounts.length &&
-          accounts.map((account) => <AccountCard {...account}></AccountCard>)}
+          accounts.map((account) => (
+            <AccountCard key={account.id} {...account}></AccountCard>
+          ))}
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <Footer />
     </>
   );
 }

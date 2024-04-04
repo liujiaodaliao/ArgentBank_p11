@@ -18,23 +18,22 @@ export default function Sign() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  /**
+   * "tony@stark.com"
+   * "password123"
+   */
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [remember, setRemember] = useState(false); //trie
 
-  const [username, setUsername] = useState("tony@stark.com");
-  const [password, setPassword] = useState("password123");
-  const [remember, setRemember] = useState(false);
-
-  const usernameRef = useRef(); 
-  // ref.currrent === document.getElementBy.... 一致的, 
+  const usernameRef = useRef();
+  // ref.currrent === document.getElementBy.... 一致的,
   //原生取表单数据用的是value属性。注意checkbox，radio 需要用checked去获取勾选状态
 
   useEffect(() => {
     // 将焦点移动到用户名输入框上
     usernameRef.current.focus();
   }, []);
-
-  const onDetail = (params) => {
-    alert(`nav to detail page ${params}`);
-  };
 
   const formValidate = () => {
     if (!username) {
@@ -57,13 +56,23 @@ export default function Sign() {
       email: username,
       password,
     };
-
     // ajax request
     const res = await LOGIN(options);
     // 存token 跳转user页面
     localStorage.setItem("token", res.token);
+
+    saveOptions(options);
+
     await getUserInfo();
     navigate("/user");
+  };
+
+  const saveOptions = (options) => {
+    if (remember) {
+      const local = JSON.stringify(options);
+      console.log(local, typeof local);
+      localStorage.setItem("options", local);
+    }
   };
 
   const getUserInfo = async () => {
@@ -73,8 +82,39 @@ export default function Sign() {
     dispatch(saveUserInfo(res));
   };
 
+  const getOptions = () => {
+    const options = localStorage.getItem("options");
+    if (!options) return;
+    return JSON.parse(options);
+  };
+
+  // 输入的同时 1保存email 2再对比localstorage中的email
+
+  useEffect(() => {
+    compareEmail();
+  }, [username]);
+
+  const compareEmail = () => {
+    const local = getOptions();
+    // console.log("实时输入的账号-->", username, "本地缓存的值", local);
+    if (local && local.email === username) {
+      // 自动填充密码
+      setPassword(local.password);
+    }
+  };
+
+  // useEffect(() => {
+  //   autoComplete();
+  // }, []);
+  // const autoComplete = () => {
+  //   const local = getOptions();
+  //   if (!local) return;
+  //   setUsername(local.email);
+  //   setPassword(local.password);
+  // };
+
   return (
-    <div>
+    <>
       <Header>
         <span className="main-nav-item">
           <i className="fa fa-user-circle"></i>
@@ -93,7 +133,9 @@ export default function Sign() {
                 id="username"
                 ref={usernameRef}
                 value={username}
-                onInput={(e) => setUsername(e.target.value)}
+                onInput={(e) => {
+                  setUsername(e.target.value);
+                }}
               />
             </div>
             <div className="input-wrapper">
@@ -121,6 +163,6 @@ export default function Sign() {
         </section>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
