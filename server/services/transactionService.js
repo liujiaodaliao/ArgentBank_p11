@@ -22,14 +22,13 @@ module.exports.createTransactions = async () => {
           category: "Initial",
           note: "Initial deposit",
         },
-        // 可以根据需要添加更多的初始交易记录
       ];
 
       // 遍历账户的初始交易记录并逐个保存到数据库
       for (const transactionData of initialTransactions) {
         const newTransaction = new Transaction(transactionData);
         const result = await newTransaction.save();
-        console.log("New transaction created:", result);
+        // console.log("New transaction created:", result);
       }
     }
   } catch (error) {
@@ -38,21 +37,10 @@ module.exports.createTransactions = async () => {
   }
 };
 
-module.exports.getTransactions = async (req) => {
+module.exports.getTransactions = async (accountId) => {
   try {
-    // 从请求头中获取 token
-    const token = req.headers.authorization.split(" ")[1];
-
-    // 验证 token 的有效性
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-
-    // 获取解码后的用户ID和账户ID
-    const userId = decodedToken.userId;
-    const accountId = req.body.accountId;
-
     // 根据用户ID和账户ID查询指定账户的交易记录
     const transactions = await Transaction.find({
-      userId: userId,
       accountId: accountId,
     });
 
@@ -62,3 +50,26 @@ module.exports.getTransactions = async (req) => {
     throw new Error(error);
   }
 };
+
+// module.exports.updateTransactions = async (
+//   transactionId,
+//   updateTransactions
+// ) => {
+//   try {
+//     // 根据交易ID查询修改账户的交易备注信息
+//     const transaction = await Transaction.findById(transactionId);
+//     if (!transaction) {
+//       throw new Error("Transaction not found");
+//     }
+//     transaction.category = updateTransactions.category;
+//     transaction.note = updateTransactions.note;
+
+//     const updateTransaction = await transaction.save();
+//     // console.log("Transaction updated:", result);
+// 
+//     return updateTransaction;
+//   } catch (error) {
+//     console.error("Error in updateTransactions:", error);
+//     throw new Error(error);
+//   }
+// };

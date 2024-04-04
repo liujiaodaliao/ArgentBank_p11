@@ -53,6 +53,6 @@ module.exports.getAccount = async (serviceData) => {
 
   const accounts = await Account.find({ userId: decodedJwtToken.id });
 
-  return accounts;
+  return accounts.map((account) => account.toObject());
 };
 // module.exports.updateAccount
