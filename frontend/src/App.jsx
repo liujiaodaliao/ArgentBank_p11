@@ -17,36 +17,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{value}</p>
-        <button
-          onClick={() => {
-            dispatch(increment(3));
-          }}
-        >
-          +
-        </button>
-
-        <button
-          onClick={() => {
-            dispatch(decrement({ test: 5 }));
-          }}
-        >
-          -
-        </button>
-      </header> */}
-
-      {/* <div className="router">
-        <Link to="/home">home</Link>
-        <Link to="/sign">sign</Link>
-      </div> */}
-      {/* 
-      <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/home" element={<Home></Home>}></Route>
-        <Route path="/sign" element={<Sign></Sign>}></Route>
-      </Routes> */}
     </div>
   );
 }

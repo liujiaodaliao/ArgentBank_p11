@@ -71,20 +71,3 @@ For some of the dynamic features, like toggling user editing, there is a mock-up
 
 And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
 
-nvm ls  
-nvm use 16  
-nvm install 16
-nvm uninstall 16.x.x
-
-LOGIN->USER(存 token\* 取 token) 怎么携带进 request.headers？
-非正常登录流程进入到 user 页面 做本地鉴权返回
-切换编辑状态（JSX 三元运算确定渲染的 dom）
-表单（收集数据，禁用属性）
-PUT->POST,传参格式一致
-保存之后，重新获取用户信息，再去存储 redux -->todo
-
-// 具体区分类型的方法 typeof->基础数据
-
-1. Array.isArray()
-2. Object.prototype.toString.call
-3. xx instanceof yy
