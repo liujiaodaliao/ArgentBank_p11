@@ -16,13 +16,10 @@ export default function User() {
   const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.userReducer.userInfo);
-
-  const [isEdit, setIsEdit] = useState(false); // 默认非编辑状态
-
   const { firstName, lastName, userName } = userInfo;
 
+  const [isEdit, setIsEdit] = useState(false); // 默认非编辑状态
   const [_userName, set_userName] = useState(userName);
-
   const [accounts, setAccounts] = useState([]); // 存放账户信息
 
   const queryAccounts = async () => {
@@ -54,15 +51,14 @@ export default function User() {
   const onSave = async () => {
     console.log("Final submitted userName", _userName);
     const res = await UPDATE_PROFILE({ userName: _userName });
-    // OK
     alert("edit successfully ");
     setIsEdit(false);
 
     //将 res 传递给 saveUserInfo 函数来更新 Redux 中的用户信息
-    console.log("updateUserInfo", res);
+    // console.log("updateUserInfo", res);
     const res2 = await GET_PROFILE();
     dispatch(saveUserInfo(res2));
-    console.log("saveUserInfo", res2);
+    // console.log("saveUserInfo", res2);
   };
 
   useEffect(() => {

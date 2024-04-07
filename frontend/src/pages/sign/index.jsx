@@ -16,12 +16,8 @@ import { useDispatch } from "react-redux";
  */
 export default function Sign() {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
-  /**
-   * "tony@stark.com"
-   * "password123"
-   */
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false); //trie
@@ -89,7 +85,6 @@ export default function Sign() {
   };
 
   // 输入的同时 1保存email 2再对比localstorage中的email
-
   useEffect(() => {
     compareEmail();
   }, [username]);
