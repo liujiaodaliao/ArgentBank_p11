@@ -9,7 +9,7 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  # User Moduls
+  # User Modules
   /user/login:
     post:
       tags:
@@ -102,7 +102,7 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  # Account  Moduls
+  # Account  Modules
   /account/getAccount:
     get:
       security:
@@ -119,14 +119,14 @@ paths:
         - application/json
       responses:
         "200":
-          description: getAccount retrieved successully
+          description: getAccount information retrieved successully
           schema:
             $ref: "#/definitions/Account"
         "400":
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  # Transaction  Moduls
+  # Transaction  Modules
   /transaction/createTransactions:
     post:
       security:
@@ -168,7 +168,7 @@ paths:
           name: Authorization
           required: true
           type: string
-        - in: path
+        - in: query
           name: accountId
           description: ID of the user's account
           required: true
@@ -196,7 +196,7 @@ paths:
           name: Authorization
           required: true
           type: string
-        - in: path
+        - in: query
           name: transactionId
           description: ID of the transaction
           required: true
@@ -228,7 +228,7 @@ paths:
           name: Authorization
           required: true
           type: string
-        - in: path
+        - in: query
           name: transactionId
           description: ID of the transaction
           required: true

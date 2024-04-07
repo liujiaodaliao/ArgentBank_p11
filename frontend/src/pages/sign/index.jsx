@@ -22,8 +22,8 @@ export default function Sign() {
    * "tony@stark.com"
    * "password123"
    */
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false); //trie
 
   const usernameRef = useRef();
