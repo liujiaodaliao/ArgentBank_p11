@@ -4,7 +4,7 @@ const accountController = require("../controllers/accountController");
 const tokenValidation = require("../middleware/tokenValidation");
 
 router.get(
-  "/getAccount",
+  "/account",
   tokenValidation.validateToken,
   accountController.getAccount
 );

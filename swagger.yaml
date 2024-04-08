@@ -103,7 +103,7 @@ paths:
         "500":
           description: Internal Server Error
   # Account  Modules
-  /account/getAccount:
+  /account:
     get:
       security:
         - Bearer: []
@@ -127,7 +127,7 @@ paths:
         "500":
           description: Internal Server Error
   # Transaction  Modules
-  /transaction/createTransactions:
+  /transaction:
     post:
       security:
         - Bearer: []
@@ -156,7 +156,7 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /transaction/getTransactions:
+  /transaction/{id}:
     get:
       security:
         - Bearer: []
@@ -168,8 +168,8 @@ paths:
           name: Authorization
           required: true
           type: string
-        - in: query
-          name: accountId
+        - in: path
+          name: id
           description: ID of the user's account
           required: true
           type: string
@@ -184,7 +184,6 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /transaction/updateTransactions:
     put:
       security:
         - Bearer: []
@@ -196,8 +195,8 @@ paths:
           name: Authorization
           required: true
           type: string
-        - in: query
-          name: transactionId
+        - in: path
+          name: id
           description: ID of the transaction
           required: true
           type: string
@@ -216,7 +215,6 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /transaction/deleteTransactionsInfo:
     delete:
       security:
         - Bearer: []
@@ -228,8 +226,8 @@ paths:
           name: Authorization
           required: true
           type: string
-        - in: query
-          name: transactionId
+        - in: path
+          name: id
           description: ID of the transaction
           required: true
           type: string

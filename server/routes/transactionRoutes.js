@@ -5,7 +5,7 @@ const tokenValidation = require("../middleware/tokenValidation");
 
 // POST请求用于创建新的交易
 router.post(
-  "/createTransactions",
+  "/transaction",
   tokenValidation.validateToken,
   async (req, res, next) => {
     try {
@@ -42,21 +42,21 @@ router.post(
 
 // GET请求用于获取特定交易的详细信息
 router.get(
-  "/getTransactions",
+  "/transaction/:id",
   tokenValidation.validateToken,
   transactionController.getTransactions
 );
 
 // PUT请求用于更新特定交易的信息
 // router.put(
-//   "/updateTransactions",
+//   "/transaction/:id",
 //   tokenValidation.validateToken,
 //   transactionController.updateTransactions
 // );
 
 // DELETE请求用于删除特定交易
 // router.delete(
-//   "/deleteTransactionsInfo",
+//   "/transaction/:id",
 //   tokenValidation.validateToken,
 //   transactionController.deleteTransactionsInfo
 // );

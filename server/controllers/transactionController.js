@@ -1,5 +1,11 @@
 const transactionService = require("../services/transactionService");
 
+/**
+ * get?id=123   -->  request.query.id
+ * get/123      -->  request.params.id
+ * POST         -->  request.body
+ */
+
 // 创建新的交易
 module.exports.createTransactions = async (req, res, next) => {
   try {
@@ -22,7 +28,7 @@ module.exports.getTransactions = async (req, res) => {
   let response = {};
   try {
     // 从请求参数中获取账户ID
-    const accountId = req.query.id;
+    const accountId = req.params.id;
 
     // 调用服务函数获取交易记录
     const transactions = await transactionService.getTransactions(accountId);
@@ -44,7 +50,7 @@ module.exports.getTransactions = async (req, res) => {
 //   let response = {};
 // try {
 // const updateTransactions = req.body;
-// const transactionId =req.params.transactionId;
+// const transactionId =req.params.id;
 
 // 调用服务函数更新交易记录
 // const updatedTransaction = await transactionService.updateTransactions(transactionId, updateTransactions);
