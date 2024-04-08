@@ -31,7 +31,7 @@ export default function User() {
   };
 
   const checkLogin = () => {
-    if (!firstName || !lastName || !userName) {
+    if (!localStorage.getItem("token")) {
       return navigate("/sign");
     }
     return queryAccounts().then((response) => {
@@ -56,9 +56,9 @@ export default function User() {
 
     //将 res 传递给 saveUserInfo 函数来更新 Redux 中的用户信息
     // console.log("updateUserInfo", res);
-    const res2 = await GET_PROFILE();
-    dispatch(saveUserInfo(res2));
-    // console.log("saveUserInfo", res2);
+    // const res2 = await GET_PROFILE();
+    dispatch(saveUserInfo(res));
+    console.log("saveUserInfo", res);
   };
 
   useEffect(() => {
