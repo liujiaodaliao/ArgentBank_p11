@@ -54,9 +54,9 @@ export default function Sign() {
     };
     // ajax request
     const res = await LOGIN(options);
-    // 存token 跳转user页面
-    localStorage.setItem("token", res.token);
 
+    // 存token options跳转user页面
+    localStorage.setItem("token", res.token);
     saveOptions(options);
 
     await getUserInfo();
@@ -65,9 +65,13 @@ export default function Sign() {
 
   const saveOptions = (options) => {
     if (remember) {
-      const local = JSON.stringify(options);
+      const { email, password } = options;
+      const _ = { email: btoa(email), password: btoa(password) };
+      const local = JSON.stringify(_);
       console.log(local, typeof local);
       localStorage.setItem("options", local);
+    } else {
+      localStorage.removeItem("options");
     }
   };
 
@@ -92,9 +96,9 @@ export default function Sign() {
   const compareEmail = () => {
     const local = getOptions();
     // console.log("实时输入的账号-->", username, "本地缓存的值", local);
-    if (local && local.email === username) {
+    if (local && atob(local.email) === username) {
       // 自动填充密码
-      setPassword(local.password);
+      setPassword(atob(local.password));
     }
   };
 
