@@ -52,15 +52,28 @@ export default function Sign() {
       email: username,
       password,
     };
+
     // ajax request
-    const res = await LOGIN(options);
+    try {
+      const res = await LOGIN(options);
 
-    // 存token options跳转user页面
-    localStorage.setItem("token", res.token);
-    saveOptions(options);
+      // 存token options跳转user页面
+      localStorage.setItem("token", res.token);
+      saveOptions(options);
 
-    await getUserInfo();
-    navigate("/user");
+      await getUserInfo();
+      navigate("/user");
+    } catch (error) {
+      // 捕获密码验证错误并处理
+      if (error.message === "Password is invalid") {
+        console.warn("Password validation error occurred: ", error);
+        // 在页面上显示友好的错误提示
+        alert("Password is invalid. Please check your password and try again.");
+      } else {
+        // 如果是其他类型的错误，则继续向上抛出
+        throw error;
+      }
+    }
   };
 
   const saveOptions = (options) => {
@@ -114,12 +127,7 @@ export default function Sign() {
 
   return (
     <>
-      <Header>
-        <span className="main-nav-item">
-          <i className="fa fa-user-circle"></i>
-          Sign In
-        </span>
-      </Header>
+      <Header></Header>
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>

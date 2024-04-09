@@ -12,36 +12,22 @@ import { GET_ACCOUNTS } from "../../services/account";
 import "./index.css";
 
 export default function User() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.userReducer.userInfo);
   const { firstName, lastName, userName } = userInfo;
 
   const [isEdit, setIsEdit] = useState(false); // 默认非编辑状态
+
   const [_userName, set_userName] = useState(userName);
+
   const [accounts, setAccounts] = useState([]); // 存放账户信息
 
   const queryAccounts = async () => {
     const res = await GET_ACCOUNTS();
     if (res.length) {
       setAccounts(res);
-      return res; // 返回响应结果
     }
-  };
-
-  const checkLogin = () => {
-    if (!localStorage.getItem("token")) {
-      return navigate("/sign");
-    }
-    return queryAccounts().then((response) => {
-      console.log(response); // 打印响应结果
-    });
-  };
-
-  const onSignOut = () => {
-    dispatch(removeUserInfo());
-    navigate("/sign");
   };
 
   const onEdit = () => {
@@ -49,7 +35,6 @@ export default function User() {
   };
 
   const onSave = async () => {
-    console.log("Final submitted userName", _userName);
     const res = await UPDATE_PROFILE({ userName: _userName });
     alert("edit successfully ");
     setIsEdit(false);
@@ -62,21 +47,12 @@ export default function User() {
   };
 
   useEffect(() => {
-    checkLogin();
+    queryAccounts();
   }, []);
 
   return (
     <>
-      <Header>
-        <span className="main-nav-item">
-          <i className="fa fa-user-circle"></i>
-          {userName}
-        </span>
-        <span className="main-nav-item" onClick={onSignOut}>
-          <i className="fa fa-sign-out"></i>
-          Sign Out
-        </span>
-      </Header>
+      <Header userClick={() => setIsEdit(true)}></Header>
       <main className="main bg-dark">
         {(isEdit && (
           <div className="edit">
@@ -88,6 +64,7 @@ export default function User() {
                   name="userName"
                   type="text"
                   value={_userName}
+                  defaultValue={userName}
                   onInput={(e) => set_userName(e.target.value)}
                 />
               </div>

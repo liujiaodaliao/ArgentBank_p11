@@ -10,9 +10,6 @@ import Footer from "../../components/Footer";
 import FeatureCard from "../../components/FeatureCard";
 export default function Home() {
   const navigate = useNavigate();
-  const nav2Sign = () => {
-    navigate("/sign");
-  };
 
   const cardList = [
     {
@@ -35,14 +32,13 @@ export default function Home() {
     },
   ];
 
+  const nav2User = () => {
+    navigate("/user");
+  };
+
   return (
     <>
-      <Header>
-        <span onClick={nav2Sign} className="main-nav-item">
-          <i className="fa fa-user-circle"></i>
-          Sign In
-        </span>
-      </Header>
+      <Header userClick={nav2User}></Header>
       <main>
         <div className="hero">
           <section className="hero-content">

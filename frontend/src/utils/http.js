@@ -23,6 +23,7 @@ instance.interceptors.response.use(
       if (innerStatus === 200) {
         return body;
       }
+      //
       return Promise.reject(message);
     }
   },
@@ -30,7 +31,7 @@ instance.interceptors.response.use(
     alert(err.response.data.message);
     return Promise.reject(err.response.data.message);
   }
-);
+)
 
 export const POST = (url, data, config) => {
   return instance.post(url, data, config);
