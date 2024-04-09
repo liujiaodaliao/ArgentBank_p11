@@ -63,7 +63,7 @@ export default function User() {
                 <input
                   name="userName"
                   type="text"
-                  value={_userName}
+                  // value={_userName}
                   defaultValue={userName}
                   onInput={(e) => set_userName(e.target.value)}
                 />
