@@ -1,9 +1,9 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import argentBankLogo from "../../assets/argentBankLogo.webp";
-import { UPDATE_PROFILE, GET_PROFILE } from "../../services/user";
+import { GET_PROFILE } from "../../services/user";
 import { removeUserInfo, saveUserInfo } from "../../store/slice/user";
 
 export default function Header(props) {
@@ -24,7 +24,7 @@ export default function Header(props) {
 
   const onSignOut = () => {
     dispatch(removeUserInfo());
-    navigate("/sign");
+    navigate("/");
   };
 
   const getUserInfo = async () => {
@@ -35,7 +35,7 @@ export default function Header(props) {
 
   const checkLogin = () => {
     if (!localStorage.getItem("token")) {
-      if (location.pathname === "/home") return;
+      if (location.pathname === "/home" || location.pathname === "/") return;
       return navigate("/sign");
     }
     getUserInfo();
