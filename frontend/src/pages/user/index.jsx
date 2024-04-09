@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -14,12 +14,14 @@ import "./index.css";
 export default function User() {
   const dispatch = useDispatch();
 
+  const usernameRef = useRef();
+
   const userInfo = useSelector((state) => state.userReducer.userInfo);
   const { firstName, lastName, userName } = userInfo;
 
   const [isEdit, setIsEdit] = useState(false); // 默认非编辑状态
 
-  const [_userName, set_userName] = useState(userName);
+  // const [_userName, set_userName] = useState(userName);
 
   const [accounts, setAccounts] = useState([]); // 存放账户信息
 
@@ -35,7 +37,12 @@ export default function User() {
   };
 
   const onSave = async () => {
-    const res = await UPDATE_PROFILE({ userName: _userName });
+    console.log(usernameRef.current.value);
+    const _username = usernameRef.current.value;
+    if (!_username) {
+      return alert("username is required");
+    }
+    const res = await UPDATE_PROFILE({ userName: _username });
     alert("edit successfully ");
     setIsEdit(false);
 
@@ -61,11 +68,12 @@ export default function User() {
               <div className="form-item">
                 <label htmlFor="userName">userName</label>
                 <input
+                  ref={usernameRef}
                   name="userName"
                   type="text"
                   // value={_userName}
                   defaultValue={userName}
-                  onInput={(e) => set_userName(e.target.value)}
+                  // onInput={(e) => set_userName(e.target.value)}
                 />
               </div>
               <div className="form-item">

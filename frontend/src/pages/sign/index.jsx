@@ -54,7 +54,6 @@ export default function Sign() {
     };
 
     // ajax request
-    // try {
       const res = await LOGIN(options);
 
       // 存token options跳转user页面
@@ -63,17 +62,6 @@ export default function Sign() {
 
       await getUserInfo();
       navigate("/user");
-    // } catch (error) {
-    //   // 捕获密码验证错误并处理
-    //   if (error.message === "Password is invalid") {
-    //     console.warn("Password validation error occurred: ", error);
-    //     // 在页面上显示友好的错误提示
-    //     alert("Password is invalid. Please check your password and try again.");
-    //   } else {
-    //     // 如果是其他类型的错误，则继续向上抛出
-    //     throw error;
-    //   }
-    // }
   };
 
   const saveOptions = (options) => {
