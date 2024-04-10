@@ -30,7 +30,20 @@ export default function Sign() {
     // 将焦点移动到用户名输入框上
     usernameRef.current.focus();
   }, []);
+  
+  useEffect(() => {
+    // 检查用户是否已经登录，如果是则重定向到用户页面
+    const checkLoggedIn = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+          // 获取用户信息，如果成功则重定向到用户页面
+          navigate("/user");
+      }
+    };
 
+    checkLoggedIn();
+  }, [navigate]);
+  
   const formValidate = () => {
     if (!username) {
       alert("username is required");
